@@ -12,31 +12,15 @@ const Homescreen = () => {
   return (
     <div style={{overflow:"hidden"}}>
       <Hero/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+   
       <Discover/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>  
-      <br/>
+     
       <Arrivals/>
-      <br/>
-      <br/>
-      <br/>
+    
       <Pict/>
-      <br/>  
-      <br/>
+  
       <Specialchild/>
-      <br/>
-      <br/>  
-      <br/>
+    
       <Start/>
  
       

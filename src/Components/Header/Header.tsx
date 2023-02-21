@@ -90,7 +90,7 @@ img{
 
 const Wrapper = styled.div`
 width: 95%;
-height:60px;
+height:100%;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -104,6 +104,5 @@ align-items: center;
 justify-content: center;
 background-color:#fff;
 position: fixed;
-
-
+box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 `
