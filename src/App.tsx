@@ -9,7 +9,7 @@ const App = () => {
     <div>
    <Header/>
    <Allroutes/>
-   {/* <Footer/> */}
+   <Footer/>
     </div>
   )
 }

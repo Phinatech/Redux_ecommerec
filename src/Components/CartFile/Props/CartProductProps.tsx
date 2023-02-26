@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { VscPaintcan } from "react-icons/vsc";
 import { BsArrowsAngleExpand } from "react-icons/bs";
+import { UseAppDispach, useAppSelector } from "../../Global/Store";
+import { addToCart, clearFromCart, removeFromCart } from "../../Global/ReduxState";
 
 interface iprops {
   price: number;
@@ -18,15 +20,18 @@ const CardProductProps: React.FC<iprops> = ({
   status,
   sign,
 }) => {
+  const readCart = useAppSelector((state) => state.myReducer.cart);
+  const dispatch = UseAppDispach();
   return (
     <div>
-      <Container>
+    {readCart?.map((props)=>(
+        <Container>
         <Pic>
           <img src={dp} />
         </Pic>
         <Details>
           <Detail>
-            <Name>{name}</Name>
+            <Name>{props.title}</Name>
             <About>
               <Div>
                 <Sign2>
@@ -48,15 +53,27 @@ const CardProductProps: React.FC<iprops> = ({
           </Info>
         </Details>
         <Buttons>
-          <button>-</button>
-          <div>1</div>
-          <button>+</button>
+          <button 
+          onClick={()=>{
+            dispatch(removeFromCart(props))
+          }}
+          >-</button>
+          <div>{props.cartQuantity}</div>
+          <button
+          onClick={()=>{
+            dispatch(addToCart(props))
+          }}
+          >+</button>
         </Buttons>
         <Price>
           <PriceDiv>${price}</PriceDiv>
-          <Remove>Remove</Remove>
+          <Remove onClick={()=>{
+            dispatch(clearFromCart())
+          }}
+          >Remove</Remove>
         </Price>
       </Container>
+    ))}
     </div>
   );
 };
@@ -163,6 +180,7 @@ const Remove = styled.div`
   font-weight: bold;
   font-size: 15px;
   color: #4f86fc;
+  cursor: pointer;
 `;
 const Div = styled.div`
   border-right: 1px solid #dce1eb;

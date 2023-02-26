@@ -86,4 +86,5 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     background-color: #E3FFE6;
+    margin-bottom: 30px;
 `

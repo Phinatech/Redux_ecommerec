@@ -2,22 +2,65 @@ import React from 'react'
 import styled from 'styled-components'
 
 
+
 import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { CreateUser } from "../Api/Api";
+import { UseAppDispach } from "../Global/Store";
+import { loginUser } from "../Global/ReduxState";
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Register = () => {
-const dispatch = UseAppDista
+const dispatch = UseAppDispach();
+const Navigate = useNavigate()
+const schema = yup
+.object({
+	name: yup.string().required("field must be required"),
+	email: yup.string().email().required(),
+	password: yup.string().min(9).required(),
+})
+.required();
+type formData = yup.InferType<typeof schema>;
+
+	const {
+		handleSubmit,
+		formState: { errors },
+		reset,
+		register,
+	} = useForm<formData>({
+		resolver: yupResolver(schema),
+	});
+
+	const post = useMutation({
+		mutationKey: ["postUser"],
+		mutationFn: CreateUser,
+		onSuccess: (data) => {
+			console.log(data.data);
+			dispatch(loginUser(data.data));
+		},
+	});
+
+	const Submit = handleSubmit((data) => {
+		post.mutate(data);
+		Navigate("/")
+		reset();
+	});
 
   return (
     <Container>
-      <Card>
+      <Card onSubmit={Submit}>
         <h3>Register</h3>
-          <input placeholder='Please enter your name' />
-		  <p></p>
-          <input placeholder='Please enter your email' />
-          <input placeholder='Please enter your Password' />
-          <MainButton>Register</MainButton>
+          <input {...register("name")} placeholder='Please enter your name' />
+		  <p>{errors?.name && errors?.name?.message} </p>
+          <input {...register("email")} placeholder='Please enter your email' />
+		  <p>{errors?.email && errors?.email?.message} </p>
+          <input {...register("password")} placeholder='Please enter your Password' />
+		  <p>{errors?.password && errors?.password?.message} </p>
+          <MainButton type="submit">Register</MainButton>
       </Card>
     </Container>
   )
@@ -40,7 +83,7 @@ const MainButton = styled.button`
 	cursor: pointer;
 	margin-top: 20px;
 `
-const Card = styled.div`
+const Card = styled.form`
 margin-top: 20px;
   padding: 20px;
 	height: 300px;

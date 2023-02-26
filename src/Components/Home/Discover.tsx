@@ -75,6 +75,6 @@ flex-direction: column;
 const Container = styled.div`
 width: 100%;
 display: flex;
-
+margin-bottom: 50px;
 justify-content: center;
 `

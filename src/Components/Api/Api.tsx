@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Endpoint = "htttp://localhost:4573";
+const Endpoint = "http://localhost:4573";
 
 interface UserData{
   name:string;
@@ -18,12 +18,12 @@ export const CreateUser = async({name,email,password}: UserData)=>{
   .then((res)=> res.data);
 }
 
-export const Allproduct = async () => {
-  return await axios.get(`${Endpoint}/api/products`).then((res) =>res.data);
+export const AllProduct = async () => {
+  return await axios.get(`${Endpoint}/api/allproducts`).then((res) =>res.data);
 };
 
-export const SingleProduct = async ()=>{
+export const SingleProduct = async (id : any)=>{
   return await axios
-  .get(`${Endpoint}/api/products/${id}`)
+  .get(`${Endpoint}/api/purchaseProduct/${id}`)
   .then((res)=> res.data);
 }

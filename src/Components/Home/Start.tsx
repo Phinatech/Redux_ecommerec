@@ -305,8 +305,8 @@ cursor: pointer;
 `;
 
 const Container = styled.div`
-width: 85%;
-height: 90%;
+width: 100%;
+/* height: 90%; */
 display: flex;
 flex-direction: column;
 justify-content: space-between;

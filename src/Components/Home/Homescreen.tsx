@@ -12,19 +12,11 @@ const Homescreen = () => {
   return (
     <div style={{overflow:"hidden"}}>
       <Hero/>
-   
       <Discover/>
-     
       <Arrivals/>
-    
       <Pict/>
-  
       <Specialchild/>
-    
       <Start/>
- 
-      
-    
     </div>
   )
 }
